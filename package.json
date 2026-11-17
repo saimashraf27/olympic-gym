@@ -1,0 +1,14 @@
+{
+  "name": "olympic-gym-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Public website for Olympic Gym (olympicgym.pk)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
