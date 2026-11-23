@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Olympic Gym | Train hard. Fingerprint entry, personal coaching and your own member app.</title>
-  <meta name="description" content="Olympic Gym: fingerprint entry, a coach who builds your training schedule and diet plan, and a member app for your fee status, attendance and progress." />
+  <title>Olympic Gym | Personal coaching, training and diet plans</title>
+  <meta name="description" content="Olympic Gym: train with a coach who builds your workout and diet plan around your goal, whether that is losing weight, building muscle or getting stronger." />
   <meta name="theme-color" content="#0081C8" />
   <link rel="icon" href="/logo.svg" />
   <link rel="canonical" href="https://olympicgym.pk/" />
@@ -12,7 +12,7 @@
   <meta property="og:site_name" content="Olympic Gym" />
   <meta property="og:url" content="https://olympicgym.pk/" />
   <meta property="og:title" content="Olympic Gym | Train hard. We handle the rest." />
-  <meta property="og:description" content="Fingerprint entry, personal coaching, training and diet plans, and a member app for your fees and progress." />
+  <meta property="og:description" content="Personal coaching, training and diet plans built around your goal. Come train with us." />
   <meta property="og:image" content="https://app.olympicgym.pk/icon-512.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,6 +38,10 @@
       packages: [],
       // Social links. Example: { instagram: 'https://instagram.com/...', facebook: 'https://facebook.com/...' }
       social: {},
+      // Facilities, shown as a list. Example: ['Free weights', 'Machines', 'Cardio area', 'Changing rooms', 'Parking']
+      facilities: [],
+      // Photos of the gym, in public/gallery/. Example: [{ src: '/gallery/floor.jpg', alt: 'Weights area' }]
+      gallery: [],
     }
   </script>
 
@@ -185,50 +189,30 @@
     }
     .chip i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
 
-    /* Phone mock */
-    .hero-visual { position: relative; display: flex; justify-content: center; min-height: 560px; }
-    .phone {
-      position: relative; width: 300px; height: 600px; border-radius: 44px; padding: 12px;
-      background: linear-gradient(160deg, #2a2f38, #0b0d11);
-      box-shadow: 0 40px 80px -20px rgba(0,0,0,.7), inset 0 0 0 2px rgba(255,255,255,.08);
-      transform: rotate(-3deg);
+    /* Hero emblem: the gym's logo inside moving Olympic-colour rings */
+    .hero-visual { position: relative; display: grid; place-items: center; min-height: 520px; }
+    .emblem { position: relative; width: min(440px, 86vw); aspect-ratio: 1; display: grid; place-items: center; }
+    .emblem-ring { position: absolute; inset: 0; border-radius: 50%; border: 3px solid transparent; }
+    .emblem-ring.r1 { border-top-color: var(--blue); border-right-color: var(--blue); animation: spin 14s linear infinite; }
+    .emblem-ring.r2 { inset: 7%; border-bottom-color: var(--yellow); border-left-color: var(--yellow); animation: spin 18s linear infinite reverse; }
+    .emblem-ring.r3 { inset: 14%; border-top-color: var(--green); border-left-color: var(--green); animation: spin 22s linear infinite; }
+    .emblem-ring.r4 { inset: 21%; border-bottom-color: var(--red); border-right-color: var(--red); animation: spin 26s linear infinite reverse; }
+    .emblem-core {
+      position: relative; width: 58%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+      background: radial-gradient(circle at 50% 40%, #ffffff 0%, #e9eef5 70%); box-shadow: 0 30px 70px -20px rgba(0,0,0,.7), 0 0 0 8px rgba(255,255,255,.06);
     }
-    .phone-screen {
-      height: 100%; border-radius: 34px; overflow: hidden; background: #F3F6FA; color: #14171C;
-      display: flex; flex-direction: column;
+    .emblem-core img { width: 74%; height: auto; }
+    .badge {
+      position: absolute; display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 14px;
+      background: #fff; color: #14171C; box-shadow: 0 20px 40px -12px rgba(0,0,0,.55); font-weight: 700; font-size: .92rem;
+      animation: bob 5s ease-in-out infinite;
     }
-    .ps-top { background: var(--blue); color: #fff; padding: 30px 18px 18px; }
-    .ps-hello { font-size: .8rem; opacity: .85; }
-    .ps-name { font-family: var(--display); font-size: 1.6rem; font-weight: 800; text-transform: uppercase; line-height: 1.05; }
-    .ps-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-    .ps-card { background: #fff; border-radius: 14px; padding: 12px 14px; box-shadow: 0 4px 14px rgba(20,23,28,.07); }
-    .ps-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-    .ps-label { font-size: .72rem; color: #5B6472; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
-    .ps-val { font-family: var(--display); font-weight: 800; font-size: 1.35rem; text-transform: uppercase; }
-    .pill { font-size: .7rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
-    .pill-green { background: #dcf5e8; color: #007a3c; }
-    .pill-yellow { background: #fff1d6; color: #8a5a00; }
-    .ps-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 8px; }
-    .ps-days span { height: 22px; border-radius: 6px; background: #e7edf4; }
-    .ps-days span.on { background: var(--green); }
-    .ps-list { list-style: none; margin-top: 6px; display: grid; gap: 6px; font-size: .82rem; font-weight: 600; }
-    .ps-list li { display: flex; justify-content: space-between; }
-    .ps-list li span { color: #5B6472; font-weight: 500; }
-    .ps-tabs { display: grid; grid-template-columns: repeat(4, 1fr); padding: 10px 8px 16px; background: #fff; border-top: 1px solid #e7edf4; }
-    .ps-tabs span { height: 6px; width: 26px; margin: 0 auto; border-radius: 3px; background: #dde4ec; }
-    .ps-tabs span:first-child { background: var(--blue); }
-
-    .float-card {
-      position: absolute; background: #fff; color: #14171C; border-radius: 16px; padding: 14px 16px;
-      box-shadow: 0 24px 50px -12px rgba(0,0,0,.55); display: flex; align-items: center; gap: 12px; min-width: 220px;
-    }
-    .float-card small { display: block; color: #5B6472; font-size: .76rem; }
-    .float-card strong { font-family: var(--display); font-size: 1.15rem; text-transform: uppercase; letter-spacing: .02em; }
-    .fc-icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; color: #fff; flex-shrink: 0; }
-    .fc-entry { left: -40px; top: 190px; animation: bob 5s ease-in-out infinite; }
-    .fc-entry .fc-icon { background: var(--green); }
-    .fc-plan { right: -14px; bottom: 90px; animation: bob 5s ease-in-out infinite 1.4s; }
-    .fc-plan .fc-icon { background: var(--yellow); color: #14171C; }
+    .badge i { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: #fff; flex-shrink: 0; font-style: normal; }
+    .badge.b1 { top: 8%; left: -4%; }
+    .badge.b2 { top: 44%; right: -8%; animation-delay: 1.2s; }
+    @media (max-width: 1180px) { .badge.b2 { right: 0; } }
+    .badge.b3 { bottom: 6%; left: 4%; animation-delay: 2.4s; }
+    @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
     .rings-strip { display: flex; height: 6px; }
@@ -284,30 +268,6 @@
     .live { display: inline-flex; align-items: center; gap: 7px; font-size: .78rem; font-weight: 700; color: var(--green); }
     .live::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 1.8s infinite; }
     @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0,166,81,.5); } 70% { box-shadow: 0 0 0 8px rgba(0,166,81,0); } 100% { box-shadow: 0 0 0 0 rgba(0,166,81,0); } }
-    .log { list-style: none; display: grid; gap: 10px; }
-    .log li { display: grid; grid-template-columns: 40px 1fr auto; gap: 12px; align-items: center; padding: 10px 12px; border-radius: 12px; background: var(--bg); }
-    .avatar { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: #fff; font-size: .9rem; }
-    .log b { display: block; font-size: .95rem; }
-    .log small { color: var(--muted); }
-    .tag { font-size: .74rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
-    .tag-in { background: color-mix(in srgb, var(--green) 16%, transparent); color: var(--green); }
-    .tag-due { background: color-mix(in srgb, var(--red) 14%, transparent); color: var(--red); }
-    .speech {
-      margin-top: 16px; display: flex; gap: 12px; align-items: center; padding: 14px 16px; border-radius: 14px;
-      background: color-mix(in srgb, var(--yellow) 18%, transparent); border: 1px dashed color-mix(in srgb, var(--yellow) 70%, transparent);
-      font-weight: 600;
-    }
-    .speech svg { color: #b97800; flex-shrink: 0; }
-    :root[data-theme="dark"] .speech svg { color: var(--yellow); }
-
-    .scanner { display: grid; place-items: center; padding: 26px 0 8px; }
-    .scanner-ring {
-      width: 150px; height: 150px; border-radius: 50%; display: grid; place-items: center; position: relative;
-      background: radial-gradient(circle, color-mix(in srgb, var(--blue) 22%, transparent), transparent 70%);
-    }
-    .scanner-ring::after { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--blue); animation: ping 2.4s ease-out infinite; }
-    @keyframes ping { 0% { transform: scale(.7); opacity: 1; } 100% { transform: scale(1.25); opacity: 0; } }
-
     .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .plan-box { border-radius: 14px; background: var(--bg); padding: 14px; }
     .plan-box h4 { font-family: var(--display); text-transform: uppercase; font-size: 1.05rem; letter-spacing: .04em; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
@@ -325,19 +285,43 @@
     .wallets { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
     .wallets span { padding: 8px 14px; border-radius: 10px; border: 1px solid var(--border); font-weight: 700; font-size: .9rem; background: var(--surface); }
 
-    /* Staff band */
-    .staff {
-      border-radius: 26px; padding: 48px; color: #fff; position: relative; overflow: hidden;
-      background: linear-gradient(120deg, #0b0d11 0%, #13202d 55%, #0a3a5a 100%);
-      display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center;
+    /* Programs */
+    .programs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .program {
+      position: relative; overflow: hidden; border-radius: 20px; padding: 30px 24px; color: #fff; min-height: 300px;
+      display: flex; flex-direction: column; background: linear-gradient(160deg, var(--c), color-mix(in srgb, var(--c) 55%, #0b0d11));
+      box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease;
     }
-    .staff h2 { color: #fff; }
-    .staff p { color: #c3cbd6; margin-top: 12px; }
-    .roles { display: grid; gap: 12px; }
-    .role { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
-    .role b { font-family: var(--display); font-size: 1.2rem; text-transform: uppercase; letter-spacing: .04em; display: block; }
-    .role span { color: #b4bdca; font-size: .95rem; }
-    .role i { width: 12px; height: 12px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+    .program:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .program::after {
+      content: ''; position: absolute; right: -40px; bottom: -40px; width: 160px; height: 160px; border-radius: 50%;
+      border: 14px solid rgba(255,255,255,.14);
+    }
+    .program .num { font-family: var(--display); font-weight: 800; font-size: 3.2rem; line-height: 1; opacity: .35; }
+    .program h3 { margin: 18px 0 10px; font-size: 1.7rem; }
+    .program p { color: rgba(255,255,255,.88); }
+    .program ul { list-style: none; margin-top: auto; padding-top: 18px; display: grid; gap: 6px; font-weight: 600; font-size: .92rem; }
+    .program li::before { content: '✓ '; }
+    .program.dark-text { color: #14171C; }
+    .program.dark-text p { color: rgba(20,23,28,.82); }
+    .program.dark-text::after { border-color: rgba(20,23,28,.1); }
+
+    /* Member perks */
+    .perks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .perk { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+    .perk-icon { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; margin-bottom: 14px; color: #fff; }
+    .perk h3 { font-size: 1.25rem; margin-bottom: 6px; }
+    .perk p { color: var(--muted); font-size: .95rem; }
+
+    /* Facilities and gallery */
+    .facilities { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .facilities li {
+      display: flex; gap: 12px; align-items: center; padding: 16px 18px; border-radius: 14px; background: var(--surface);
+      border: 1px solid var(--border); font-weight: 700;
+    }
+    .facilities li::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 28px; }
+    .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; display: block; }
 
     /* Packages */
     .packages { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
@@ -415,7 +399,8 @@
       .pillars { grid-template-columns: repeat(2, 1fr); }
       .hero-grid { grid-template-columns: 1fr; gap: 40px; }
       .hero-visual { min-height: 0; }
-      .feature, .staff { grid-template-columns: 1fr; gap: 40px; }
+      .feature { grid-template-columns: 1fr; gap: 40px; }
+      .programs, .perks { grid-template-columns: repeat(2, 1fr); }
       .feature.flip .feature-visual { order: 0; }
       .foot { grid-template-columns: 1fr 1fr; }
     }
@@ -437,13 +422,14 @@
       .pillars { grid-template-columns: 1fr; }
       section.block { padding: 76px 0; }
       .feature + .feature { margin-top: 80px; }
-      .staff { padding: 30px 22px; }
       .plan-grid { grid-template-columns: 1fr; }
-      .phone { width: 260px; height: 530px; }
-      .float-card { min-width: 0; padding: 10px 12px; }
-      .phone { margin-top: 48px; }
-      .fc-entry { left: 0; top: 0; }
-      .fc-plan { display: none; }
+      .programs, .perks { grid-template-columns: 1fr; }
+      .program { min-height: 0; }
+      .hero-visual { min-height: 0; margin-top: 10px; }
+      .badge { font-size: .8rem; padding: 8px 10px; }
+      .badge i { width: 28px; height: 28px; }
+      .badge.b1 { left: 0; }
+      .badge.b2 { right: 0; }
       .foot { grid-template-columns: 1fr; }
       .hero-ctas .btn { flex: 1 1 100%; }
       .brand-name { font-size: 1.3rem; }
@@ -489,9 +475,9 @@
         <span class="brand-name">Olympic <span>Gym</span></span>
       </a>
       <nav class="nav-links" aria-label="Main">
-        <a href="#how">How it works</a>
+        <a href="#programs">Programs</a>
         <a href="#coaching">Coaching</a>
-        <a href="#app">Member app</a>
+        <a href="#membership">Membership</a>
         <a href="#faq">FAQ</a>
         <a href="#visit">Visit</a>
       </nav>
@@ -508,10 +494,9 @@
       </div>
     </div>
     <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-      <a href="#how">How it works</a>
-      <a href="#entry">Fingerprint entry</a>
+      <a href="#programs">Programs</a>
       <a href="#coaching">Coaching</a>
-      <a href="#app">Member app</a>
+      <a href="#membership">Membership</a>
       <a href="#faq">FAQ</a>
       <a href="#visit">Visit</a>
       <a class="btn btn-outline" href="https://app.olympicgym.pk">Member login</a>
@@ -534,171 +519,146 @@
         <div>
           <h1>Train <span class="stroke">harder.</span><br /><span class="blue">We handle</span> the rest.</h1>
           <p class="lead">
-            Walk in with your fingerprint. Train with a coach who writes your plan. Check your fees, attendance,
-            workouts and diet on your phone. That's Olympic Gym.
+            Whether you want to lose weight, build muscle or simply get fit, you train with a coach who builds your
+            workout and diet plan around your goal, and keeps you on track every week.
           </p>
           <div class="hero-ctas">
             <a class="btn btn-yellow join-link" href="#visit">Join Olympic Gym <svg width="20" height="20"><use href="#i-arrow"/></svg></a>
-            <a class="btn btn-ghost" href="https://app.olympicgym.pk">Open member app</a>
+            <a class="btn btn-ghost" href="#programs">See programs</a>
           </div>
           <div class="hero-chips">
-            <span class="chip"><i style="background:#0081C8"></i>Fingerprint entry</span>
-            <span class="chip"><i style="background:#FCB131"></i>Personal coach</span>
-            <span class="chip"><i style="background:#00A651"></i>Training &amp; diet plans</span>
-            <span class="chip"><i style="background:#EE334E"></i>JazzCash &amp; Easypaisa</span>
+            <span class="chip"><i style="background:#0081C8"></i>Personal coaching</span>
+            <span class="chip"><i style="background:#FCB131"></i>Training plans</span>
+            <span class="chip"><i style="background:#00A651"></i>Diet plans</span>
+            <span class="chip"><i style="background:#EE334E"></i>Progress tracking</span>
           </div>
         </div>
 
         <div class="hero-visual" aria-hidden="true">
-          <div class="phone">
-            <div class="phone-screen">
-              <div class="ps-top">
-                <div class="ps-hello">Good morning</div>
-                <div class="ps-name">Ready to train?</div>
-              </div>
-              <div class="ps-body">
-                <div class="ps-card">
-                  <div class="ps-row">
-                    <div><div class="ps-label">Fee status</div><div class="ps-val">Paid</div></div>
-                    <span class="pill pill-green">Up to date</span>
-                  </div>
-                </div>
-                <div class="ps-card">
-                  <div class="ps-row"><div class="ps-label">Attendance this week</div><span class="pill pill-yellow">5 / 7</span></div>
-                  <div class="ps-days"><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span class="on"></span><span class="on"></span><span></span></div>
-                </div>
-                <div class="ps-card">
-                  <div class="ps-label">Today · Push day</div>
-                  <ul class="ps-list">
-                    <li>Bench press <span>4 × 8</span></li>
-                    <li>Shoulder press <span>3 × 10</span></li>
-                    <li>Triceps dips <span>3 × 12</span></li>
-                  </ul>
-                </div>
-                <div class="ps-card">
-                  <div class="ps-label">Weight progress</div>
-                  <svg viewBox="0 0 200 50" width="100%" height="44" preserveAspectRatio="none">
-                    <polyline points="0,12 30,16 60,20 90,22 120,28 150,31 180,36 200,38" fill="none" stroke="#0081C8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-              </div>
-              <div class="ps-tabs"><span></span><span></span><span></span><span></span></div>
-            </div>
-          </div>
-          <div class="float-card fc-entry">
-            <div class="fc-icon"><svg width="22" height="22"><use href="#i-finger"/></svg></div>
-            <div><small>Front door</small><strong>Entry granted</strong></div>
-          </div>
-          <div class="float-card fc-plan">
-            <div class="fc-icon"><svg width="22" height="22"><use href="#i-apple"/></svg></div>
-            <div><small>From your coach</small><strong>New diet plan</strong></div>
+          <div class="emblem">
+            <span class="emblem-ring r1"></span>
+            <span class="emblem-ring r2"></span>
+            <span class="emblem-ring r3"></span>
+            <span class="emblem-ring r4"></span>
+            <div class="emblem-core"><img src="/logo.svg" alt="" width="533" height="606" /></div>
+            <div class="badge b1"><i style="background:var(--blue)"><svg width="18" height="18"><use href="#i-dumbbell"/></svg></i>Personal coach</div>
+            <div class="badge b2"><i style="background:var(--green)"><svg width="18" height="18"><use href="#i-apple"/></svg></i>Diet plan</div>
+            <div class="badge b3"><i style="background:var(--red)"><svg width="18" height="18"><use href="#i-check"/></svg></i>Track your progress</div>
           </div>
         </div>
       </div>
     </section>
     <div class="rings-strip" aria-hidden="true"><i style="background:#0081C8"></i><i style="background:#FCB131"></i><i style="background:#14171C"></i><i style="background:#00A651"></i><i style="background:#EE334E"></i></div>
 
-    <!-- Pillars -->
+    <!-- Why -->
     <section class="block">
       <div class="wrap">
         <div class="section-head center reveal">
           <div class="kicker">Why Olympic Gym</div>
           <h2>More than a gym floor</h2>
-          <p class="lead">Four things that make training here different.</p>
+          <p class="lead">You don't just get a membership card. You get a coach, a plan and a team behind you.</p>
         </div>
         <div class="pillars">
           <div class="pillar reveal" style="--c:#0081C8">
-            <div class="pillar-icon"><svg width="26" height="26"><use href="#i-finger"/></svg></div>
-            <h3>Fingerprint entry</h3>
-            <p>No cards to lose and no register to sign. Your fingerprint is your membership card.</p>
-          </div>
-          <div class="pillar reveal" style="--c:#FCB131">
             <div class="pillar-icon"><svg width="26" height="26"><use href="#i-dumbbell"/></svg></div>
             <h3>Your own coach</h3>
-            <p>Get a coach assigned who writes a training schedule for your body and your goal.</p>
+            <p>A coach is assigned to you and builds a training schedule for your body, your level and your goal.</p>
           </div>
           <div class="pillar reveal" style="--c:#00A651">
             <div class="pillar-icon"><svg width="26" height="26"><use href="#i-apple"/></svg></div>
-            <h3>Diet plan</h3>
-            <p>Meals planned by your coach, with your weight and BMI tracked as you progress.</p>
+            <h3>A diet that fits</h3>
+            <p>Training is half the work. Your coach plans your meals too, so the results show.</p>
           </div>
           <div class="pillar reveal" style="--c:#EE334E">
-            <div class="pillar-icon"><svg width="26" height="26"><use href="#i-phone"/></svg></div>
-            <h3>Member app</h3>
-            <p>Fees, attendance, workouts, diet and progress, all in one app on your phone.</p>
+            <div class="pillar-icon"><svg width="26" height="26"><use href="#i-check"/></svg></div>
+            <h3>Progress you can see</h3>
+            <p>Your weight and BMI are tracked as you train, so you and your coach know what's working.</p>
+          </div>
+          <div class="pillar reveal" style="--c:#FCB131">
+            <div class="pillar-icon"><svg width="26" height="26"><use href="#i-finger"/></svg></div>
+            <h3>Hassle-free</h3>
+            <p>Walk in with your fingerprint and pay your fee by JazzCash, Easypaisa, card or cash.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- How it works -->
-    <section class="block alt" id="how">
+    <!-- Programs -->
+    <section class="block alt" id="programs">
       <div class="wrap">
         <div class="section-head reveal">
-          <div class="kicker">How it works</div>
+          <div class="kicker">Programs</div>
+          <h2>Train for your goal</h2>
+          <p class="lead">Tell your coach what you want. Your workouts and your diet are planned around it.</p>
+        </div>
+        <div class="programs">
+          <div class="program reveal" style="--c:#EE334E">
+            <div class="num">01</div>
+            <h3>Weight loss</h3>
+            <p>Burn fat and get lighter with workouts and a diet plan built to bring your weight down steadily.</p>
+            <ul><li>Workouts for fat loss</li><li>Calorie-smart diet plan</li><li>Weekly weight check</li></ul>
+          </div>
+          <div class="program reveal" style="--c:#0081C8">
+            <div class="num">02</div>
+            <h3>Muscle gain</h3>
+            <p>Build size and shape with progressive training and the right food to grow.</p>
+            <ul><li>Split training schedule</li><li>Protein-focused diet</li><li>Progress tracked</li></ul>
+          </div>
+          <div class="program reveal dark-text" style="--c:#FCB131">
+            <div class="num">03</div>
+            <h3>Strength</h3>
+            <p>Lift heavier and move better with a plan focused on the big compound lifts.</p>
+            <ul><li>Compound lifts</li><li>Planned progression</li><li>Coach-checked form</li></ul>
+          </div>
+          <div class="program reveal" style="--c:#00A651">
+            <div class="num">04</div>
+            <h3>General fitness</h3>
+            <p>Feel fitter, sleep better and keep active with a balanced plan you can stick to.</p>
+            <ul><li>Balanced routine</li><li>Healthy eating plan</li><li>Train at your pace</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to join -->
+    <section class="block" id="how">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="kicker">Getting started</div>
           <h2>Three steps to your first workout</h2>
         </div>
         <div class="steps">
           <div class="step reveal">
             <div class="step-num">01</div>
-            <h3>Join at the front desk</h3>
-            <p>Pick your package and register. We enroll your fingerprint on the entry machine there and then.</p>
+            <h3>Visit and join</h3>
+            <p>Come to the front desk, pick your package and register. Your fingerprint is enrolled for entry there and then.</p>
           </div>
           <div class="step reveal">
             <div class="step-num">02</div>
             <h3>Meet your coach</h3>
-            <p>Your coach sets up your training schedule and diet plan. Both show up in your member app.</p>
+            <p>Tell your coach your goal. They set up your training schedule and diet plan for you.</p>
           </div>
           <div class="step reveal">
             <div class="step-num">03</div>
-            <h3>Punch in and train</h3>
-            <p>Place your finger, walk in, follow today's plan. Track your attendance and weight as you go.</p>
+            <h3>Train and track</h3>
+            <p>Follow your plan, train regularly and watch your progress as your coach checks in on it.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Features -->
-    <section class="block">
+    <!-- Coaching -->
+    <section class="block alt">
       <div class="wrap">
-        <!-- Fingerprint entry -->
-        <div class="feature" id="entry">
-          <div class="reveal">
-            <div class="kicker">Fingerprint entry</div>
-            <h2>Your finger is your key</h2>
-            <p class="lead">A ZKTeco fingerprint machine at the door checks you in and keeps your attendance for you.</p>
-            <ul class="checks">
-              <li><svg width="20" height="20"><use href="#i-check"/></svg><div><strong>Walk in, no card</strong><span>Your fingerprint is enrolled when you join, and re-enrolled any time it needs it.</span></div></li>
-              <li><svg width="20" height="20"><use href="#i-check"/></svg><div><strong>Attendance kept for you</strong><span>Every visit is saved, so you and your coach can see how regularly you train.</span></div></li>
-              <li><svg width="20" height="20"><use href="#i-check"/></svg><div><strong>A friendly fee reminder</strong><span>If your fee is due, the machine tells you out loud as you punch in, so you never miss a date.</span></div></li>
-            </ul>
-          </div>
-          <div class="feature-visual reveal" aria-hidden="true">
-            <div class="panel">
-              <div class="panel-title"><strong>Entry log</strong><span class="live">Live</span></div>
-              <div class="scanner">
-                <div class="scanner-ring"><svg width="72" height="72" style="color:var(--blue)"><use href="#i-finger"/></svg></div>
-              </div>
-              <ul class="log">
-                <li><span class="avatar" style="background:#0081C8">A</span><div><b>Member 0142</b><small>6:42 AM · Main door</small></div><span class="tag tag-in">Checked in</span></li>
-                <li><span class="avatar" style="background:#00A651">S</span><div><b>Member 0087</b><small>6:47 AM · Main door</small></div><span class="tag tag-in">Checked in</span></li>
-                <li><span class="avatar" style="background:#EE334E">H</span><div><b>Member 0231</b><small>6:51 AM · Main door</small></div><span class="tag tag-due">Fee due</span></li>
-              </ul>
-              <div class="speech"><svg width="22" height="22"><use href="#i-volume"/></svg>"Please pay your fee."</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Coaching -->
         <div class="feature flip" id="coaching">
           <div class="reveal">
             <div class="kicker">Coaching</div>
             <h2>A plan written for you</h2>
-            <p class="lead">Your coach builds your training schedule and diet plan and keeps them up to date as you progress.</p>
+            <p class="lead">No guessing on the gym floor. Your coach tells you what to do today, and adjusts it as you get stronger.</p>
             <ul class="checks">
-              <li><svg width="20" height="20"><use href="#i-check"/></svg><div><strong>Training schedule</strong><span>Day-by-day exercises, sets and reps, ready on your phone before you reach the floor.</span></div></li>
+              <li><svg width="20" height="20"><use href="#i-check"/></svg><div><strong>Training schedule</strong><span>Day-by-day exercises with sets and reps, planned for your level.</span></div></li>
               <li><svg width="20" height="20"><use href="#i-check"/></svg><div><strong>Diet plan</strong><span>Your meals for the day, set by your coach around your goal.</span></div></li>
-              <li><svg width="20" height="20"><use href="#i-check"/></svg><div><strong>Weight and BMI</strong><span>Your weight is logged and charted, and your medical notes are on file with your coach.</span></div></li>
+              <li><svg width="20" height="20"><use href="#i-check"/></svg><div><strong>Weight and BMI</strong><span>Your progress is logged, and any medical notes are on file with your coach.</span></div></li>
             </ul>
           </div>
           <div class="feature-visual reveal" aria-hidden="true">
@@ -735,73 +695,45 @@
             </div>
           </div>
         </div>
-
-        <!-- Member app + payments -->
-        <div class="feature" id="app">
-          <div class="reveal">
-            <div class="kicker">Member app</div>
-            <h2>Your gym in your pocket</h2>
-            <p class="lead">Open <a href="https://app.olympicgym.pk" style="color:var(--blue);font-weight:700">app.olympicgym.pk</a> on your phone and sign in. Add it to your home screen and it opens like any other app.</p>
-            <ul class="checks">
-              <li><svg width="20" height="20"><use href="#i-check"/></svg><div><strong>Fee status and due date</strong><span>See at a glance whether you're paid up and when your next fee is due.</span></div></li>
-              <li><svg width="20" height="20"><use href="#i-check"/></svg><div><strong>Pay from home</strong><span>Pay by JazzCash, Easypaisa or card, then upload the receipt. The gym approves it and your status updates.</span></div></li>
-              <li><svg width="20" height="20"><use href="#i-check"/></svg><div><strong>Notifications</strong><span>Get told when a payment is approved or your coach changes your training or diet plan.</span></div></li>
-            </ul>
-          </div>
-          <div class="feature-visual reveal" aria-hidden="true">
-            <div class="panel">
-              <div class="panel-title"><strong>Pay your fee</strong><span class="pill pill-yellow">2 minutes</span></div>
-              <div class="pay-steps">
-                <div class="pay-step"><span class="n">1</span><div>Send your fee by JazzCash, Easypaisa or card</div></div>
-                <div class="pay-step"><span class="n">2</span><div>Upload the transaction screenshot or stamped receipt in the app</div></div>
-                <div class="pay-step"><span class="n" style="background:var(--green)">3</span><div>The gym approves it and your fee shows as paid</div></div>
-              </div>
-              <div class="wallets"><span>JazzCash</span><span>Easypaisa</span><span>Card</span><span>Cash at desk</span></div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- Staff -->
-    <section class="block alt">
+    <!-- Facilities and gallery: shown once filled in (window.GYM.facilities / gallery) -->
+    <section class="block" id="facilities" hidden>
       <div class="wrap">
-        <div class="staff reveal">
-          <div>
-            <div class="kicker" style="color:var(--yellow)">Run by a real system</div>
-            <h2>Behind the front desk</h2>
-            <p>Our staff panel keeps members, fees, coaching and the fingerprint machine in one place, so the team spends less time on paperwork and more time on the floor with you.</p>
-            <div class="hero-ctas" style="margin-top:26px">
-              <a class="btn btn-ghost" href="https://admin.olympicgym.pk">Staff login</a>
-            </div>
-          </div>
-          <div class="roles">
-            <div class="role"><i style="background:var(--blue)"></i><div><b>Admins</b><span>Members, packages, fee approvals, staff and reports that open straight in Excel.</span></div></div>
-            <div class="role"><i style="background:var(--yellow)"></i><div><b>Coaches</b><span>Their own members, training schedules and diet plans built from templates.</span></div></div>
-            <div class="role"><i style="background:var(--green)"></i><div><b>Moderators</b><span>Assign coaches to members and help the admins keep the gym running.</span></div></div>
-          </div>
+        <div class="section-head reveal">
+          <div class="kicker">Facilities</div>
+          <h2>Everything you need to train</h2>
         </div>
+        <ul class="facilities" id="facilityList"></ul>
+        <div class="gallery" id="galleryGrid" hidden></div>
       </div>
     </section>
 
-    <!-- Packages -->
-    <section class="block" id="packages">
+    <!-- Membership -->
+    <section class="block alt" id="membership">
       <div class="wrap">
         <div class="section-head center reveal">
           <div class="kicker">Membership</div>
-          <h2>Packages</h2>
-          <p class="lead">Pick the package that fits your goal and your schedule.</p>
+          <h2>Join Olympic Gym</h2>
+          <p class="lead">Pick the package that fits your goal and your schedule. Every member gets:</p>
+        </div>
+        <div class="perks" style="margin-bottom:40px">
+          <div class="perk reveal"><div class="perk-icon" style="background:var(--blue)"><svg width="22" height="22"><use href="#i-dumbbell"/></svg></div><h3>A coach</h3><p>Training schedule and diet plan made for you.</p></div>
+          <div class="perk reveal"><div class="perk-icon" style="background:var(--yellow);color:#14171C"><svg width="22" height="22"><use href="#i-finger"/></svg></div><h3>Fingerprint entry</h3><p>No card needed. Your attendance is kept for you.</p></div>
+          <div class="perk reveal"><div class="perk-icon" style="background:var(--green)"><svg width="22" height="22"><use href="#i-phone"/></svg></div><h3>Member app</h3><p>Your plan, fee status and progress on your phone.</p></div>
+          <div class="perk reveal"><div class="perk-icon" style="background:var(--red)"><svg width="22" height="22"><use href="#i-wallet"/></svg></div><h3>Easy payment</h3><p>JazzCash, Easypaisa, card or cash at the desk.</p></div>
         </div>
         <div class="packages" id="packageList" hidden></div>
         <div class="no-packages reveal" id="noPackages">
-          <p>Packages and prices are set at the front desk. Message or visit us and we'll find the one that fits your goal and your timing.</p>
+          <p>Packages and prices are available at the front desk. Message or visit us and we'll help you pick the one that fits your goal and your timing.</p>
           <a class="btn btn-primary join-link" href="#visit">Ask about packages</a>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="block alt" id="faq">
+    <section class="block" id="faq">
       <div class="wrap">
         <div class="section-head center reveal">
           <div class="kicker">FAQ</div>
@@ -809,40 +741,40 @@
         </div>
         <div class="faq reveal">
           <details>
-            <summary>How do I get in?</summary>
-            <p>With your fingerprint. It's enrolled on the machine at the door when you join, and that's all you need to walk in.</p>
+            <summary>I'm a beginner. Is Olympic Gym for me?</summary>
+            <p>Yes. Your coach starts from where you are today and builds your training and diet plan around your level and your goal.</p>
+          </details>
+          <details>
+            <summary>How do I join?</summary>
+            <p>Visit the front desk, choose your package and register. We enroll your fingerprint for entry and introduce you to your coach.</p>
+          </details>
+          <details>
+            <summary>Do I get a diet plan?</summary>
+            <p>Yes. Your coach sets a diet plan around your goal, whether that's losing weight, building muscle or general fitness, and updates it as you progress.</p>
           </details>
           <details>
             <summary>How do I pay my fee?</summary>
-            <p>Pay by JazzCash, Easypaisa or card and upload the receipt or transaction screenshot in the member app, or pay at the front desk. Once the gym approves it, your fee shows as paid.</p>
+            <p>Pay at the front desk, or by JazzCash, Easypaisa or card and upload the receipt in the member app. Once it's approved your fee shows as paid.</p>
           </details>
           <details>
-            <summary>What happens if my fee is due?</summary>
-            <p>Your app shows your due date, and the fingerprint machine reminds you out loud when you punch in, so it never catches you by surprise.</p>
+            <summary>How do I get in?</summary>
+            <p>With your fingerprint. It's enrolled when you join, so there's no card to carry or forget.</p>
           </details>
           <details>
-            <summary>Who makes my training and diet plan?</summary>
-            <p>Your assigned coach. They build your training schedule and diet plan, and update them as you progress. You'll get a notification in the app when they do.</p>
-          </details>
-          <details>
-            <summary>How do I get the member app?</summary>
-            <p>Open <a href="https://app.olympicgym.pk" style="color:var(--blue);font-weight:700">app.olympicgym.pk</a> on your phone and sign in with the details the front desk gives you. Use "Add to Home Screen" in your browser and it opens like a normal app.</p>
-          </details>
-          <details>
-            <summary>Can I see my attendance and progress?</summary>
-            <p>Yes. Your attendance history and your weight and BMI progress are all in the member app.</p>
+            <summary>Can I track my progress?</summary>
+            <p>Yes. Your weight, BMI and attendance are recorded, and you can see them in the member app at <a href="https://app.olympicgym.pk" style="color:var(--blue);font-weight:700">app.olympicgym.pk</a>.</p>
           </details>
         </div>
       </div>
     </section>
 
     <!-- Visit -->
-    <section class="block" id="visit">
+    <section class="block alt" id="visit">
       <div class="wrap">
         <div class="section-head reveal">
           <div class="kicker">Visit us</div>
           <h2>Come train with us</h2>
-          <p class="lead">Drop by the front desk to join. We'll register you, enroll your fingerprint and introduce you to your coach.</p>
+          <p class="lead">Drop by the front desk to join. We'll get you registered and introduce you to your coach.</p>
         </div>
         <div class="visit reveal">
           <div class="visit-card" id="addressCard" hidden>
@@ -861,7 +793,7 @@
           </div>
           <div class="visit-card">
             <h3><svg width="22" height="22"><use href="#i-phone"/></svg>Already a member?</h3>
-            <p>Check your fees, attendance and plan in the member app.</p>
+            <p>See your plan, fee status and progress in the member app.</p>
             <a class="link" href="https://app.olympicgym.pk">Open the member app <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
           </div>
         </div>
@@ -872,10 +804,10 @@
     <section class="cta">
       <div class="wrap">
         <h2>Your first rep starts here</h2>
-        <p>Join Olympic Gym and get a coach, a plan and an app that keeps you on track.</p>
+        <p>Join Olympic Gym and train with a coach and a plan built around your goal.</p>
         <div class="hero-ctas">
           <a class="btn btn-yellow join-link" href="#visit">Join now <svg width="20" height="20"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn-ghost" href="https://app.olympicgym.pk">Member login</a>
+          <a class="btn btn-ghost" href="#programs">See programs</a>
         </div>
       </div>
     </section>
@@ -886,30 +818,30 @@
       <div class="foot">
         <div>
           <a class="brand" href="#top"><img class="brand-logo" src="/logo.svg" alt="" width="42" height="48" /><span class="brand-name">Olympic <span>Gym</span></span></a>
-          <p style="margin-top:14px;max-width:340px">Fingerprint entry, personal coaching, training and diet plans, and a member app that keeps it all in one place.</p>
+          <p style="margin-top:14px;max-width:340px">Personal coaching, training plans and diet plans built around your goal. Train harder. We handle the rest.</p>
           <p id="footAddress" style="margin-top:10px" hidden></p>
         </div>
         <div>
           <h4>Explore</h4>
           <ul>
-            <li><a href="#how">How it works</a></li>
+            <li><a href="#programs">Programs</a></li>
             <li><a href="#coaching">Coaching</a></li>
-            <li><a href="#packages">Packages</a></li>
+            <li><a href="#membership">Membership</a></li>
             <li><a href="#faq">FAQ</a></li>
           </ul>
         </div>
         <div>
-          <h4>Sign in</h4>
+          <h4>Members</h4>
           <ul>
             <li><a href="https://app.olympicgym.pk">Member app</a></li>
-            <li><a href="https://admin.olympicgym.pk">Staff panel</a></li>
+            <li><a href="#visit">Visit us</a></li>
           </ul>
           <ul id="socialList" style="margin-top:14px"></ul>
         </div>
       </div>
       <div class="foot-bottom">
         <span>© <span id="year"></span> Olympic Gym. All rights reserved.</span>
-        <span>Website &amp; gym system by <a href="https://www.comionprivatelimited.com" target="_blank" rel="noopener">Comion</a></span>
+        <span><a href="https://admin.olympicgym.pk">Staff</a> · Website by <a href="https://www.comionprivatelimited.com" target="_blank" rel="noopener">Comion</a></span>
       </div>
     </div>
   </footer>
@@ -996,6 +928,19 @@
         });
         list.hidden = false; $('noPackages').hidden = true;
       }
+      var fac = G.facilities || [], gal = G.gallery || [];
+      if (fac.length) {
+        fac.forEach(function (f) { var li = document.createElement('li'); li.textContent = f; $('facilityList').appendChild(li); });
+      }
+      if (gal.length) {
+        gal.forEach(function (g) {
+          var img = document.createElement('img'); img.src = g.src; img.alt = g.alt || 'Olympic Gym'; img.loading = 'lazy';
+          $('galleryGrid').appendChild(img);
+        });
+        $('galleryGrid').hidden = false;
+      }
+      if (fac.length || gal.length) $('facilities').hidden = false;
+
       var social = G.social || {}, socialList = $('socialList');
       Object.keys(social).forEach(function (k) {
         if (!social[k]) return;
