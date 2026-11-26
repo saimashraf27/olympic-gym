@@ -147,7 +147,7 @@
     .header.scrolled { border-bottom-color: var(--border); }
     .nav { display: flex; align-items: center; gap: 24px; height: 72px; }
     .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .brand-logo { width: 42px; height: 48px; object-fit: contain; }
+    .brand-logo { width: 46px; height: 46px; object-fit: contain; border-radius: 50%; padding: 3px; background: #0b0e13; }
     .brand-name { font-family: var(--display); font-weight: 800; font-size: 1.55rem; letter-spacing: .04em; text-transform: uppercase; line-height: 1; }
     .brand-name span { color: var(--blue); }
     .nav-links { display: flex; gap: 24px; margin-left: auto; white-space: nowrap; }
@@ -199,9 +199,9 @@
     .emblem-ring.r4 { inset: 21%; border-bottom-color: var(--red); border-right-color: var(--red); animation: spin 26s linear infinite reverse; }
     .emblem-core {
       position: relative; width: 58%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
-      background: radial-gradient(circle at 50% 40%, #ffffff 0%, #e9eef5 70%); box-shadow: 0 30px 70px -20px rgba(0,0,0,.7), 0 0 0 8px rgba(255,255,255,.06);
+      background: radial-gradient(circle at 50% 38%, #1d2430 0%, #0b0e13 72%); box-shadow: 0 30px 70px -20px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.12), 0 0 60px -10px rgba(0,129,200,.45);
     }
-    .emblem-core img { width: 74%; height: auto; }
+    .emblem-core img { width: 80%; height: auto; transform: translateY(2%); }
     .badge {
       position: absolute; display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 14px;
       background: #fff; color: #14171C; box-shadow: 0 20px 40px -12px rgba(0,0,0,.55); font-weight: 700; font-size: .92rem;
@@ -471,7 +471,7 @@
   <header class="header" id="top">
     <div class="wrap nav">
       <a class="brand" href="#top" aria-label="Olympic Gym home">
-        <img class="brand-logo" src="/logo.svg" alt="" width="42" height="48" />
+        <img class="brand-logo" src="/logo.svg" alt="" width="46" height="46" />
         <span class="brand-name">Olympic <span>Gym</span></span>
       </a>
       <nav class="nav-links" aria-label="Main">
@@ -817,7 +817,7 @@
     <div class="wrap">
       <div class="foot">
         <div>
-          <a class="brand" href="#top"><img class="brand-logo" src="/logo.svg" alt="" width="42" height="48" /><span class="brand-name">Olympic <span>Gym</span></span></a>
+          <a class="brand" href="#top"><img class="brand-logo" src="/logo.svg" alt="" width="46" height="46" /><span class="brand-name">Olympic <span>Gym</span></span></a>
           <p style="margin-top:14px;max-width:340px">Personal coaching, training plans and diet plans built around your goal. Train harder. We handle the rest.</p>
           <p id="footAddress" style="margin-top:10px" hidden></p>
         </div>
